@@ -95,5 +95,19 @@ def getKML():
     return kml.kml()
 
 
+@app.route("/autoreload_kml")
+def autoreloadKML():
+    print "Call autoreload_kml api"
+    import simplekml
+    kml = simplekml.Kml()
+
+    netlink = kml.newnetworklink(name="Network Link")
+    netlink.link.href = "http://127.0.0.1:5000/kml"
+    netlink.link.viewrefreshmode = simplekml.ViewRefreshMode.onstop
+    kml.networklinkcontrol.minrefreshperiod = 5
+
+    return kml.kml()
+
+
 if __name__ == "__main__":
     app.run()
