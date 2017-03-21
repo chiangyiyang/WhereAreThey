@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def hello():
-    return "Hello Yiyang!"
+    return "Hello!"
 
 
 @app.route("/now")
@@ -21,10 +21,10 @@ def add(a, b):
 
 @app.route("/update/<name>/<x>/<y>/<info>")
 def updateLoc(name, x, y, info):
+    print "Call update api"
     import sqlite3
 
     conn = sqlite3.connect('Data.db')
-    print "Opened database successfully";
     sql = "INSERT INTO LOC (NAME,X,Y,INFO) \
           VALUES ( '%s', %f, %f, '%s' )" % (name, float(x), float(y), info)
     conn.execute(sql)
@@ -35,10 +35,10 @@ def updateLoc(name, x, y, info):
 
 @app.route("/list")
 def listAll():
+    print "Call list api"
     import sqlite3
 
     conn = sqlite3.connect('Data.db')
-    print "Opened database successfully";
     sql = "SELECT * FROM LOC"
     cursor = conn.execute(sql)
     res = ""
@@ -67,10 +67,10 @@ def listAll():
 
 @app.route("/erease_all")
 def eraseAll():
+    print "Call erase_all api"
     import sqlite3
 
     conn = sqlite3.connect('Data.db')
-    print "Opened database successfully";
     sql = "DELETE FROM LOC"
     conn.execute(sql)
     conn.commit()
@@ -80,13 +80,13 @@ def eraseAll():
 
 @app.route("/kml")
 def getKML():
+    print "Call kml api"
     import sqlite3
     import simplekml
 
     kml = simplekml.Kml()
 
     conn = sqlite3.connect('Data.db')
-    print "Opened database successfully";
     sql = "SELECT * FROM LOC"
     cursor = conn.execute(sql)
     for row in cursor:
