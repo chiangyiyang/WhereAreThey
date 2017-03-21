@@ -49,5 +49,17 @@ def listAll():
     return res
 
 
+@app.route("/erease_all")
+def eraseAll():
+    import sqlite3
+
+    conn = sqlite3.connect('Data.db')
+    print "Opened database successfully";
+    sql = "DELETE FROM LOC"
+    conn.execute(sql)
+    conn.commit()
+    return "Done"
+
+
 if __name__ == "__main__":
     app.run()
