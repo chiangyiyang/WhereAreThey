@@ -84,6 +84,7 @@ def getKML():
     import simplekml
 
     kml = simplekml.Kml()
+
     conn = sqlite3.connect('Data.db')
     print "Opened database successfully";
     sql = "SELECT * FROM LOC"
